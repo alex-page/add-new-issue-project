@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/alex-page/add-new-issue-project/issues"
   },
-  "homepage": "https://github.com/alex-page/add-new-issue-project#readme"
+  "homepage": "https://github.com/alex-page/add-new-issue-project#readme",
+  "dependencies": {
+    "actions-toolkit": "^2.0.0"
+  }
 }
