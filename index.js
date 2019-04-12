@@ -2,16 +2,16 @@ const { Toolkit } = require( 'actions-toolkit' );
 
 
 Toolkit.run(async ( tools ) => {
-  // Get the current issue or pullrequest URL
-  const url = tools.context.payload.issue 
-    ? tools.context.payload.issue.html_url 
-    : tools.context.payload.pull_request.html_url;
-
   const projectNumber = tools.arguments[ 0 ];
   const projectColumn = tools.arguments[ 1 ];
 
   tools.log( `Project number arg: ${ projectNumber }` );
   tools.log( `Project column arg: ${ projectColumn }` );
+
+  // Get the current issue or pullrequest URL
+  const url = tools.context.payload.issue 
+    ? tools.context.payload.issue.html_url 
+    : tools.context.payload.pull_request.html_url;
 
   // Get the project ID and the column ID to insert the issue into
   const { resource } = await tools.github.graphql(`query {
