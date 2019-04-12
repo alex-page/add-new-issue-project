@@ -2,8 +2,9 @@ const { Toolkit } = require( 'actions-toolkit' );
 
 
 Toolkit.run(async ( tools ) => {
-  const projectNumber = tools.arguments[ 0 ];
-  const projectColumn = tools.arguments[ 1 ];
+  tools.log( tools.arguments );
+  const projectNumber = tools.arguments.projectnumber;
+  const projectColumn = tools.arguments.projectcolumn;
 
   tools.log( `Project number arg: ${ projectNumber }` );
   tools.log( `Project column arg: ${ projectColumn }` );
