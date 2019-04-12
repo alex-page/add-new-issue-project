@@ -7,10 +7,34 @@ Toolkit.run(async ( tools ) => {
     : tools.context.payload.pull_request.html_url;
 
   tools.log( tools.context.payload );
-  
-  tools.log( `Adding ${ url } to project` );
+
+  // Get the project ID and the column ID to insert the issue into
+  const result = await tools.graphql(`query {
+    resource( url: "${ url }" ) {
+      ... on Issue {
+        id
+        repository {
+          projects( first: 10, states: [OPEN] ) {
+            nodes {
+              name
+              id
+              columns( first: 10 ) {
+                nodes{
+                  id
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }`);
+
+  tools.log( result );
 
   tools.log( tools.arguments );
+  tools.log( `Adding ${ url } to project` );
 
   tools.log.success( 'Hello world 🦁' );
 }, {
