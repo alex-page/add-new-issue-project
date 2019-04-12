@@ -7,8 +7,8 @@ Toolkit.run(async ( tools ) => {
     ? tools.context.payload.issue.html_url 
     : tools.context.payload.pull_request.html_url;
 
-  const projectNumber = tools.arguments.projectnumber;
-  const projectColumn = tools.arguments.projectcolumn;
+  const projectNumber = tools.arguments[ 0 ];
+  const projectColumn = tools.arguments[ 1 ];
 
   tools.log( `Project number arg: ${ projectNumber }` );
   tools.log( `Project column arg: ${ projectColumn }` );
