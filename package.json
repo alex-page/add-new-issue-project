@@ -1,0 +1,24 @@
+{
+  "name": "add-new-issue-project",
+  "version": "1.0.0",
+  "description": "GitHub action to automagically add new issues to projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-page/add-new-issue-project.git"
+  },
+  "keywords": [
+    "github-actions",
+    "github-projects",
+    "issues"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-page/add-new-issue-project/issues"
+  },
+  "homepage": "https://github.com/alex-page/add-new-issue-project#readme"
+}

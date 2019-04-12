@@ -10,5 +10,11 @@ LABEL "com.github.actions.description" = "Automagically add new issues to projec
 LABEL "com.github.actions.icon" = "plus"
 LABEL "com.github.actions.color" = "gray-dark"
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ADD package.json /package.json
+ADD package-lock.json /package-lock.json
+WORKDIR /
+COPY . /
+
+RUN npm install
+
+ENTRYPOINT ["node", "/index.js"]
