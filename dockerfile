@@ -12,7 +12,7 @@ LABEL "com.github.actions.color" = "gray-dark"
 
 ADD package.json /package.json
 ADD package-lock.json /package-lock.json
-WORKDIR /
+
 COPY . /
 
 RUN npm install
