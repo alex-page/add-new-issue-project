@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -eu
+set -e
 
-sh -c "echo $*"
+echo "hello 🦁"
