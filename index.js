@@ -6,10 +6,8 @@ Toolkit.run(async ( tools ) => {
     ? tools.context.payload.issue.html_url 
     : tools.context.payload.pull_request.html_url;
 
-  tools.log( tools.context.payload );
-
   // Get the project ID and the column ID to insert the issue into
-  const result = await tools.graphql(`query {
+  const result = await tools.github.graphql(`query {
     resource( url: "${ url }" ) {
       ... on Issue {
         id
