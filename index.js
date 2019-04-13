@@ -87,6 +87,6 @@ Toolkit.run( async ( tools ) => {
     tools.exit.failure( error );
   }
 }, {
-  event: [ 'issues.opened', 'pull_request.opened' ],
+  event: [ 'issues.opened' ],
   secrets: [ 'GITHUB_TOKEN' ],
 })
