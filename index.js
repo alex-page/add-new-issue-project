@@ -9,12 +9,12 @@ Toolkit.run(async ( tools ) => {
   // Get the data from the event
   const issueUrl   = tools.context.payload.issue.html_url;
   const issueTitle = tools.context.payload.issue.title;
-  const issueId    = tools.context.payload.issue.id;
 
-  // Get the project name, number and the column ID and name
+  // Get the issue id, project name and number, column ID and name
   const { resource } = await tools.github.graphql(`query {
     resource( url: "${ issueUrl }" ) {
       ... on Issue {
+        id
         repository {
           projects( first: 10, states: [OPEN] ) {
             nodes {
@@ -49,6 +49,9 @@ Toolkit.run(async ( tools ) => {
       }
     }
   }`);
+
+  // Get the issue ID
+  const issueId = resource.id;
 
   // Get the project from the matching provided number
   const project = resource.repository.projects.nodes
