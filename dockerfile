@@ -1,20 +1,30 @@
-FROM node:10
+# Use the latest version of Node.js
+#
+# You may prefer the full image:
+# FROM node
+#
+# or even an alpine image (a smaller, faster, less-feature-complete image):
+# FROM node:alpine
+#
+# You can specify a version:
+# FROM node:10-slim
+FROM node:alpine
 
-LABEL version = "0.0.1"
-LABEL maintainer = "Alex Page <alex@alexpage.com.au>"
-LABEL repository = "https://github.com/alex-page/add-new-issue-project"
-LABEL homepage = "https://github.com/alex-page/add-new-issue-project"
+# Labels for GitHub to read your action
+LABEL "com.github.actions.name"="Add new issues to project"
+LABEL "com.github.actions.description"="✨ Magically add new issues to projects"
 
-LABEL "com.github.actions.name" = "Add new issues to project"
-LABEL "com.github.actions.description" = "Automagically add new issues to projects"
-LABEL "com.github.actions.icon" = "plus"
-LABEL "com.github.actions.color" = "gray-dark"
+LABEL "com.github.actions.icon"="plus"
+LABEL "com.github.actions.color"="green"
 
-ADD package.json /package.json
-ADD package-lock.json /package-lock.json
+# Copy the package.json and package-lock.json
+COPY package*.json ./
 
-COPY . /
+# Install dependencies
+RUN npm ci
 
-RUN npm install
+# Copy the rest of your action's code
+COPY . .
 
+# Run `node /index.js`
 ENTRYPOINT ["node", "/index.js"]
