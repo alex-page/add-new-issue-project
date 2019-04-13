@@ -1,7 +1,7 @@
 const { Toolkit } = require( 'actions-toolkit' );
 
 
-Toolkit.run(async ( tools ) => {
+Toolkit.run( async ( tools ) => {
   // Get the arguments
   const projectNumber = tools.arguments._[ 0 ];
   const columnName    = tools.arguments._[ 1 ];
@@ -58,25 +58,25 @@ Toolkit.run(async ( tools ) => {
     .filter( node => node.number === projectNumber )[ 0 ];
 
   // Get the column from the matching provided column name
-  const column = project.columns.nodes.filter( node => node.name == columnName )[ 0 ];
+  const column = project.columns.nodes.filter( node => node.name === columnName )[ 0 ];
   const columnId = column.id;
 
   // Check we have a valid column ID
-  if( !columnId || !project ){
+  if( !columnId || !project ) {
     tools.exit.failure(
       `Could not find project number "${ projectNumber }" or column "${ columnName }"`
     );
   }
 
   // Add the card to the project
-  tools.log( columnId, issueId );
-  await tools.github.graphql(`
-    mutation {
+  tools.log( issueId, columnId );
+  await tools.github.graphql(
+    `mutation {
       addProjectCard( input: { contentId: ${ issueId }, projectColumnId: ${ columnId } }) {
         clientMutationId
       }
-    }
-  `);
+    }`
+  );
 
   tools.log.success(
     `Added issue ${ issueTitle } to project ${ project.name } in column ${ column.name }`
