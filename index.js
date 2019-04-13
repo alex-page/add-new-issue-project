@@ -56,12 +56,11 @@ Toolkit.run(async ( tools ) => {
     }
   }`);
 
-  tools.log( resource.repository.projects );
-  tools.log( resource.repository.projects.nodes );
+  resource.repository.projects.nodes.forEach( node => tools.log( node ) );
 
   const issueId = resource.id;
   tools.log( `Issue ID: ${ issueId }`) ;
-  tools.log
+
   const project = resource.repository.projects.nodes.filter( node => node.number === projectNumber );
   const projectId = project.id;
   tools.log( `Project ID: ${ projectId }` );
