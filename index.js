@@ -56,16 +56,16 @@ Toolkit.run(async ( tools ) => {
     }
   }`);
 
-  resource.repository.projects.nodes.forEach( node => tools.log( node ) );
+  resource.repository.projects.nodes.forEach( node => tools.log( node.number, typeof node.number, typeof projectNumber ) );
 
   const issueId = resource.id;
   tools.log( `Issue ID: ${ issueId }`) ;
 
-  const project = resource.repository.projects.nodes.filter( node => node.number === projectNumber );
+  const project = resource.repository.projects.nodes.filter( node => node.number == projectNumber );
   const projectId = project.id;
   tools.log( `Project ID: ${ projectId }` );
 
-  const projectColumnId = project.columns.nodes.filter( node => node.name === projectColumn );
+  const projectColumnId = project.columns.nodes.filter( node => node.name == projectColumn );
   tools.log( `Project column ID: ${ projectColumnId }` );
 
 
