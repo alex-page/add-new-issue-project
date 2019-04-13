@@ -3,7 +3,7 @@
 > ✨ GitHub action to automagically add new issues to projects.
 
 
-# How to use
+## How to use
 
 To use this action we need the project number and the name of the column for the new issues to go into. 
 - Get the project number from the URL `https://github.com/alex-page/test-actions/projects/1` this URL would be `1`.
@@ -26,6 +26,6 @@ action "alex-page/add-new-issue-project" {
 > Note: Replace `1` with your project number and `To do` with your project column.
 
 
-# Release history
+## Release history
 
 - v0.0.1 - First release
