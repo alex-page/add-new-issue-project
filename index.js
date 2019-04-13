@@ -72,7 +72,7 @@ Toolkit.run( async ( tools ) => {
   tools.log( issueId, columnId );
   await tools.github.graphql(
     `mutation {
-      addProjectCard( input: { contentId: ${ issueId }, projectColumnId: ${ columnId } }) {
+      addProjectCard( input: { contentId: "${ issueId }", projectColumnId: "${ columnId }" }) {
         clientMutationId
       }
     }`
