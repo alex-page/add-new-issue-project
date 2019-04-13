@@ -59,13 +59,14 @@ Toolkit.run(async ( tools ) => {
   const columnId = column.id;
 
   // Check we have a valid column ID
-  if( !columnId ){
+  if( !columnId || !project ){
     tools.exit.failure(
-      `Could not find column for project number "${ projectNumber }", column "${ columnName }"`
+      `Could not find project number "${ projectNumber }" or column "${ columnName }"`
     );
   }
 
   // Add the card to the project
+  tools.log( columnId, issueId );
   await tools.github.graphql(`
     mutation {
       addProjectCard( input: { contentId: ${ issueId }, projectColumnId: ${ columnId } }) {
