@@ -56,16 +56,21 @@ Toolkit.run(async ( tools ) => {
     }
   }`);
 
-  tools.log( resource );
+  tools.log( resource.repository.projects );
+  tools.log( resource.repository.projects.nodes );
 
   const issueId = resource.id;
+  tools.log( `Issue ID: ${ issueId }`) ;
+  tools.log
   const project = resource.repository.projects.nodes.filter( node => node.number === projectNumber );
   const projectId = project.id;
-  const projectColumnId = project.columns.nodes.filter( node => node.name === projectColumn );
-
-  tools.log( `Issue ID: ${ issueId }`) ;
   tools.log( `Project ID: ${ projectId }` );
+
+  const projectColumnId = project.columns.nodes.filter( node => node.name === projectColumn );
   tools.log( `Project column ID: ${ projectColumnId }` );
+
+
+
 
   if( !projectColumnId ){
     tools.exit.failure( `Could not find column for "${ projectColumn }"` );
