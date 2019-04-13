@@ -12,45 +12,10 @@ Toolkit.run( async ( tools ) => {
     const issueTitle = tools.context.payload.issue.title;
     const issueId    = tools.context.payload.issue.node_id;
 
+    tools.log( tools.context.payload );
+
     // Get the issue id, project name and number, column ID and name
-    const { resource } = await tools.github.graphql(`query {
-      resource( url: "${ issueUrl }" ) {
-        ... on Issue {
-          id
-          repository {
-            projects( first: 10, states: [OPEN] ) {
-              nodes {
-                name
-                number
-                columns( first: 10 ) {
-                  nodes {
-                    id
-                    name
-                  }
-                }
-              }
-            }
-            owner {
-              url
-              ... on Organization {
-                projects( first: 10, states: [OPEN] ) {
-                  nodes {
-                    name
-                    number
-                    columns( first: 10 ) {
-                      nodes {
-                        id
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }`);
+    // New code goes here
 
     // Get the project from the matching provided number
     const project = resource.repository.projects.nodes
@@ -68,13 +33,7 @@ Toolkit.run( async ( tools ) => {
     }
 
     // Add the card to the project
-    await tools.github.graphql(
-      `mutation {
-        addProjectCard( input: { contentId: "${ issueId }", projectColumnId: "${ columnId }" }) {
-          clientMutationId
-        }
-      }`
-    );
+    await tools.github.createCard({ column_id: columnId, content_id: issueId, content_type: "Issue" });
 
     // Log success message
     tools.log.success(
