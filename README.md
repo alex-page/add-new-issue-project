@@ -6,7 +6,7 @@
 ## How to use
 
 To use this action we need the project number and the name of the column for the new issues to go into. 
-- Get the project number from the URL `https://github.com/alex-page/test-actions/projects/1` this URL would be `1`.
+- Get the project number from the project URL `projects/1` the number would be `1`.
 - Get the column name from the project board for example "To do".
 
 In your project create a new workflow file `.github/main.workflow`:
