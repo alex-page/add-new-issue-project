@@ -63,10 +63,7 @@ Toolkit.run( async ( tools ) => {
 
     // Get the column from the matching provided column name
     const columns = [ ...repoProjects, ...orgProjects ]
-      .map( project => {
-        tools.log( project.columns );
-        return project.columns;
-      }).nodes
+      .map( project => project.columns.nodes )
       .filter( node => node.name === columnName );
 
     
