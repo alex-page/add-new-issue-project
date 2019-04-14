@@ -45,9 +45,7 @@ Toolkit.run( async ( tools ) => {
     }`);
 
     // Get an array of all matching projects
-    const repoProjects = resource.repository 
-      && resource.repository.projects.nodes 
-      || [];
+    const repoProjects = resource.repository.projects.nodes || [];
 
     const orgProjects = resource.repository.owner 
       && resource.repository.owner.projects.nodes 
