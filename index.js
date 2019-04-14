@@ -57,19 +57,14 @@ Toolkit.run( async ( tools ) => {
     const orgProjects  = GetValue( resource, 'repository.owner.projects.nodes' )
       ? GetValue( resource, 'repository.owner.projects.nodes' )
       : [];
-
-    tools.log( repoProjects, orgProjects );
-    tools.log( [ ...repoProjects, ...orgProjects ] );
-
-    // Get the column from the matching provided column name
+    
+    // Get the columns with matching names
     const columns = [ ...repoProjects, ...orgProjects ]
-      .map( project => project.columns.nodes )
-      // .filter( node => {
-      //   tools.log( node );
-      //   return node.name === columnName;
-      // });
-
-    tools.log( columns );
+      .flatMap( projects => {
+        return projects.columns.nodes
+          ? projects.columns.nodes.filter( column => column.name === columnName )
+          : [];
+      });
 
     // Check we have a valid column ID
     if( !columns.length ) {
