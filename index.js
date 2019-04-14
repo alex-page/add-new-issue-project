@@ -8,14 +8,11 @@ Toolkit.run( async ( tools ) => {
     const columnName  = tools.arguments._[ 1 ];
 
     // Get the data from the event
-    const { issue } = tools.context.payload;
-
-    tools.log( tools.context.payload );
-    tools.log( issue );
+    const issue = tools.context.payload.issue;
 
     // Get the project ID from the name
     const { resource } = await tools.github.graphql(`query {
-      resource( url: "${ issue.url }" ) {
+      resource( url: "${ issue.html_url }" ) {
         ... on Issue {
           repository {
             projects( search: "${ projectName }", first: 1, states: [OPEN] ) {
@@ -46,8 +43,6 @@ Toolkit.run( async ( tools ) => {
         }
       }
     }`);
-
-    tools.log( resource );
 
     // Get the closest matching array of columns
     const repoProjectColumns = resource.repository.project.nodes.length
