@@ -9,7 +9,6 @@ Toolkit.run( async ( tools ) => {
 
     // Get the data from the event
     const issue = tools.context.payload.issue;
-    tools.log( tools.context.payload )
 
     // Get the project ID from the name
     const { resource } = await tools.github.graphql(`query {
@@ -68,13 +67,17 @@ Toolkit.run( async ( tools ) => {
     // Add the cards to the columns
     const createCards = columns.map( column => {
       return new Promise( async( resolve, reject ) => {
-        tools.log( issue.id, column.id );
         try {
-          await tools.github.graphql(`mutation {
-            addProjectCard( input: { contentId: "${ issue.id }", projectColumnId: "${ column.id }" }) {
-              clientMutationId
-            }
-          }`);
+          await tools.github.projects.createCard({
+            column_id: column.id,
+            content_id: issue.node_id,
+            content_type: "Issue"
+          });
+          // await tools.github.graphql(`mutation {
+          //   addProjectCard( input: { contentId: "${ issue.node_id }", projectColumnId: "${ column.id }" }) {
+          //     clientMutationId
+          //   }
+          // }`);
 
           resolve();
         }
