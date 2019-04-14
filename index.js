@@ -15,7 +15,7 @@ Toolkit.run( async ( tools ) => {
       resource( url: "${ issue.html_url }" ) {
         ... on Issue {
           repository {
-            projects( search: "${ projectName }", first: 1, states: [OPEN] ) {
+            projects( search: "${ projectName }", first: 10, states: [OPEN] ) {
               nodes {
                 columns( first: 100 ) {
                   nodes {
@@ -27,7 +27,7 @@ Toolkit.run( async ( tools ) => {
             }
             owner {
               ... on Organization {
-                projects( search: "${ projectName }", first: 1, states: [OPEN] ) {
+                projects( search: "${ projectName }", first: 10, states: [OPEN] ) {
                   nodes {
                     columns( first: 100 ) {
                       nodes {
@@ -44,30 +44,26 @@ Toolkit.run( async ( tools ) => {
       }
     }`);
 
+    // Search an object deeply
     const GetValue = ( obj, key ) => key
       .split( "." )
-      .reduce(( o, x ) => {
-        tools.log( o );
-        tools.log( x );
-        return ( typeof o == "undefined" || o === null ) ? o : o[ x ];
-      }, obj );
+      .reduce(( o, x ) => ( typeof o == "undefined" || o === null ) ? o : o[ x ], obj );
 
-    // Get the closest matching array of columns
-    const repoProjectColumns = GetValue( 
-      resource,
-      'repository.projects.nodes[ 0 ].columns'
-    );
+    // Get an array of all matching projects
+    const repoProjects = GetValue( resource, 'repository.projects.nodes' )
+      ? GetValue( resource, 'repository.projects.nodes' )
+      : [];
 
-    const orgProjectColumns = GetValue(
-      resource,
-      'repository.owner.projects.nodes[ 0 ].columns'
-    )
+    const orgProjects  = GetValue( resource, 'repository.owner.projects.nodes' )
+      ? GetValue( resource, 'repository.owner.projects.nodes' )
+      : [];
 
-    tools.log( repoProjectColumns );
-    tools.log( orgProjectColumns );
+    tools.log( repoProjects, orgProjects );
+    tools.log( [ ...repoProjects, ...orgProjects ] );
 
     // Get the column from the matching provided column name
-    const columns = [ repoProjectColumns, orgProjectColumns ].nodes
+    const columns = [ ...repoProjects, ...orgProjects ]
+      .map( project => project.column ).nodes
       .filter( node => node.name === columnName );
 
     // Check we have a valid column ID
