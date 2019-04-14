@@ -59,6 +59,9 @@ Toolkit.run( async ( tools ) => {
       'resource.repository.owner.projects.nodes[ 0 ].columns'
     )
 
+    tools.log( repoProjectColumns );
+    tools.log( orgProjectColumns );
+
     // Get the column from the matching provided column name
     const columns = [ repoProjectColumns, orgProjectColumns ].nodes
       .filter( node => node.name === columnName );
