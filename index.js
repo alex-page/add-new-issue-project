@@ -11,7 +11,7 @@ Toolkit.run( async ( tools ) => {
     const issue = tools.context.payload.issue;
 
     // Get the project ID from the name
-    const resource = await tools.github.graphql(`query {
+    const { resource } = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
         ... on Issue {
           repository {
