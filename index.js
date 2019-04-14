@@ -10,8 +10,6 @@ Toolkit.run( async ( tools ) => {
     // Get the data from the event
     const issue = tools.context.payload.issue;
 
-    tools.log( issue );
-
     // Get the project ID from the name
     const resource = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
@@ -46,14 +44,12 @@ Toolkit.run( async ( tools ) => {
       }
     }`);
 
-    tools.log( resource );
-
     // Get the closest matching array of columns
-    const repoProjectColumns = resource.repository.project.nodes.length
+    const repoProjectColumns = resource.repository.projects.nodes.length
       ? resource.repository.project.nodes[ 0 ].columns
       : [];
 
-    const orgProjectColumns = resource.repository.owner.project.nodes.length 
+    const orgProjectColumns = resource.repository.owner.projects.nodes.length 
       ? resource.repository.owner.project.nodes[ 0 ].columns
       : [];
 
