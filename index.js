@@ -46,12 +46,12 @@ Toolkit.run( async ( tools ) => {
 
     // Get the closest matching array of columns
     let projectColumns = [];
-    tool.log( resource.repository.projects.nodes );
+    tools.log( resource.repository.projects.nodes );
     if( resource.repository.projects.nodes.length ){
       projectColumns.push( resource.repository.projects.nodes[ 0 ].columns );
     }
 
-    tool.log( resource.repository.owner, resource.repository.owner.projects.nodes.length );
+    tools.log( resource.repository.owner, resource.repository.owner.projects.nodes.length );
     if( resource.repository.owner && resource.repository.owner.projects.nodes.length ){
       projectColumns.push( resource.repository.owner.projects.nodes[ 0 ].columns );
     }
