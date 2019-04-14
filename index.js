@@ -46,11 +46,11 @@ Toolkit.run( async ( tools ) => {
 
     // Get the closest matching array of columns
     const repoProjectColumns = resource.repository.projects.nodes.length
-      ? resource.repository.project.nodes[ 0 ].columns
+      ? resource.repository.projects.nodes[ 0 ].columns
       : [];
 
-    const orgProjectColumns = resource.repository.owner.projects.nodes.length 
-      ? resource.repository.owner.project.nodes[ 0 ].columns
+    const orgProjectColumns = resource.repository.owner && resource.repository.owner.projects.nodes.length
+      ? resource.repository.owner.projects.nodes[ 0 ].columns
       : [];
 
     // Get the column from the matching provided column name
