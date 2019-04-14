@@ -49,7 +49,7 @@ Toolkit.run( async ( tools ) => {
       ? resource.repository.projects.nodes
       : [];
 
-    const orgProjects  = resource.repository.owner.projects.nodes
+    const orgProjects = resource.repository.owner && resource.repository.owner.projects.nodes
       ? resource.repository.owner.projects.nodes
       : [];
     
