@@ -46,7 +46,6 @@ Toolkit.run( async ( tools ) => {
 
     // Get an array of all matching projects
     const repoProjects = resource.repository.projects.nodes || [];
-
     const orgProjects = resource.repository.owner
       && resource.repository.owner.projects
       && resource.repository.owner.projects.nodes
@@ -60,23 +59,20 @@ Toolkit.run( async ( tools ) => {
           : [];
       });
 
-
-    tools.log( columns );
-
     // Check we have a valid column ID
     if( !columns.length ) {
       tools.exit.failure( `Could not find "${ projectName }" with "${ columnName }" column` );
     }
 
-    // Add the cards to the project
+    // Add the cards to the columns
     const createCards = columns.map( column => {
       return new Promise( async( resolve, reject ) => {
         try {
-          await tools.github.projects.createCard({ 
-            column_id: column.id,
-            content_id: issue.node_id,
-            content_type: "Issue"
-          });
+          await tools.github.graphql(`mutation {
+            addProjectCard( input: { contentId: "${ issue.id }", projectColumnId: "${ column.id }" }) {
+              clientMutationId
+            }
+          }`);
 
           resolve();
         }
