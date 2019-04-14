@@ -63,13 +63,13 @@ Toolkit.run( async ( tools ) => {
     }
 
     // Add the card to the project
-    columns.forEach( column => {
+    for( const column in columns ) {
       await tools.github.createCard({ 
         column_id: column.id,
         content_id: issue.node_id,
         content_type: "Issue"
       });
-    });
+    };
 
     // Log success message
     tools.log.success( `Added "${ issue.title }" to "${ projectName }" in "${ columnName }".` );
