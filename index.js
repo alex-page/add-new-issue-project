@@ -66,7 +66,7 @@ Toolkit.run( async ( tools ) => {
       .map( project => project.columns.nodes )
       .filter( node => node.name === columnName );
 
-    
+    tools.log( columns );
 
     // Check we have a valid column ID
     if( !columns.length ) {
