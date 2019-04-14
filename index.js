@@ -49,7 +49,7 @@ Toolkit.run( async ( tools ) => {
       .reduce(( o, x ) => {
         tools.log( o );
         tools.log( x );
-        ( typeof o == "undefined" || o === null ) ? o : o[ x ]
+        return ( typeof o == "undefined" || o === null ) ? o : o[ x ];
       }, obj );
 
     // Get the closest matching array of columns
