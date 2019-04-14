@@ -45,17 +45,19 @@ Toolkit.run( async ( tools ) => {
     }`);
 
     // Get the closest matching array of columns
-    const repoProjectColumns = resource.repository.projects.nodes.length
-      ? resource.repository.projects.nodes[ 0 ].columns
-      : [];
+    let projectColumns = [];
+    tool.log( resource.repository.projects.nodes );
+    if( resource.repository.projects.nodes.length ){
+      projectColumns.push( resource.repository.projects.nodes[ 0 ].columns );
+    }
 
-    const orgProjectColumns = resource.repository.owner && resource.repository.owner.projects.nodes.length
-      ? resource.repository.owner.projects.nodes[ 0 ].columns
-      : [];
+    tool.log( resource.repository.owner, resource.repository.owner.projects.nodes.length );
+    if( resource.repository.owner && resource.repository.owner.projects.nodes.length ){
+      projectColumns.push( resource.repository.owner.projects.nodes[ 0 ].columns );
+    }
 
     // Get the column from the matching provided column name
-    const columns = [ ...repoProjectColumns, ...orgProjectColumns ].nodes
-      .filter( node => node.name === columnName );
+    const columns = projectColumns.nodes.filter( node => node.name === columnName );
 
     // Check we have a valid column ID
     if( !columns.length ) {
