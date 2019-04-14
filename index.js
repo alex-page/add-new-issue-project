@@ -54,12 +54,12 @@ Toolkit.run( async ( tools ) => {
     // Get the closest matching array of columns
     const repoProjectColumns = GetValue( 
       resource,
-      'resource.repository.projects.nodes[ 0 ].columns'
+      'repository.projects.nodes[ 0 ].columns'
     );
 
     const orgProjectColumns = GetValue(
       resource,
-      'resource.repository.owner.projects.nodes[ 0 ].columns'
+      'repository.owner.projects.nodes[ 0 ].columns'
     )
 
     tools.log( repoProjectColumns );
