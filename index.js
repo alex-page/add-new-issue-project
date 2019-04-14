@@ -46,7 +46,10 @@ Toolkit.run( async ( tools ) => {
 
     const GetValue =  ( obj, key ) => key
       .split( "." )
-      .reduce(( o, x ) => ( typeof o == "undefined" || o === null ) ? o : o[ x ], obj );
+      .reduce(( o, x ) => {
+        tools.log( o );
+        ( typeof o == "undefined" || o === null ) ? o : o[ x ]
+      }, obj );
 
     // Get the closest matching array of columns
     const repoProjectColumns = GetValue( 
