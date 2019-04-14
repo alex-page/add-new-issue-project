@@ -8,7 +8,7 @@ Toolkit.run( async ( tools ) => {
     const columnName  = tools.arguments._[ 1 ];
 
     // Get the data from the event
-    const { issue } = tools.context.payload.issue;
+    const { issue } = tools.context.payload;
 
     // Get the project ID from the name
     const { resource } = await tools.github.graphql(`query {
