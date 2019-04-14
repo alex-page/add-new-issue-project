@@ -73,7 +73,7 @@ Toolkit.run( async ( tools ) => {
 
     // Add the card to the project
     for( const column in columns ) {
-      await tools.github.createCard({ 
+      await tools.github.projects.createCard({ 
         column_id: column.id,
         content_id: issue.node_id,
         content_type: "Issue"
