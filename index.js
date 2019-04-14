@@ -60,7 +60,7 @@ Toolkit.run( async ( tools ) => {
     )
 
     // Get the column from the matching provided column name
-    const columns = [ ...repoProjectColumns, ...orgProjectColumns ].nodes
+    const columns = [ repoProjectColumns, orgProjectColumns ].nodes
       .filter( node => node.name === columnName );
 
     // Check we have a valid column ID
