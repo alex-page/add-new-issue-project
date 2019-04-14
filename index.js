@@ -44,6 +44,8 @@ Toolkit.run( async ( tools ) => {
       }
     }`);
 
+    tools.log( resource );
+
     // Get the closest matching array of columns
     const repoProjectColumns = resource.repository.project.nodes.length
       ? resource.repository.project.nodes[ 0 ].columns
