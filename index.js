@@ -13,7 +13,7 @@ Toolkit.run( async ( tools ) => {
     tools.log( issue );
 
     // Get the project ID from the name
-    const { resource } = await tools.github.graphql(`query {
+    const resource = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
         ... on Issue {
           repository {
@@ -45,6 +45,8 @@ Toolkit.run( async ( tools ) => {
         }
       }
     }`);
+
+    tools.log( resource );
 
     // Get the closest matching array of columns
     const repoProjectColumns = resource.repository.project.nodes.length
