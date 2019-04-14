@@ -68,15 +68,27 @@ Toolkit.run( async ( tools ) => {
       tools.exit.failure( `Could not find "${ projectName }" with "${ columnName }" column` );
     }
 
-    // Add the card to the project
-    for( const column in columns ) {
-      tools.log( column );
-      await tools.github.projects.createCard({ 
-        column_id: column.id,
-        content_id: issue.node_id,
-        content_type: "Issue"
-      });
-    };
+    // Add the cards to the project
+    const createCards = columns.map( column => {
+      return new Promise( async( resolve, reject ) => {
+        try {
+          await tools.github.projects.createCard({ 
+            column_id: column.id,
+            content_id: issue.node_id,
+            content_type: "Issue"
+          });
+
+          resolve();
+        }
+        catch( error ){
+          reject( error );
+        }
+      })
+    })
+
+    // Wait for completion
+    await Promise.all( createCards )
+      .catch( error => tools.exit.failure( error ) );
 
     // Log success message
     tools.log.success( `Added "${ issue.title }" to "${ projectName }" in "${ columnName }".` );
