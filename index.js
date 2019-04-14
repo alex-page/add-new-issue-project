@@ -44,10 +44,11 @@ Toolkit.run( async ( tools ) => {
       }
     }`);
 
-    const GetValue =  ( obj, key ) => key
+    const GetValue = ( obj, key ) => key
       .split( "." )
       .reduce(( o, x ) => {
         tools.log( o );
+        tools.log( x );
         ( typeof o == "undefined" || o === null ) ? o : o[ x ]
       }, obj );
 
