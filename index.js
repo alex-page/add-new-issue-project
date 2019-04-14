@@ -44,18 +44,13 @@ Toolkit.run( async ( tools ) => {
       }
     }`);
 
-    // Search an object deeply
-    const GetValue = ( obj, key ) => key
-      .split( "." )
-      .reduce(( o, x ) => ( typeof o == "undefined" || o === null ) ? o : o[ x ], obj );
-
     // Get an array of all matching projects
-    const repoProjects = GetValue( resource, 'repository.projects.nodes' )
-      ? GetValue( resource, 'repository.projects.nodes' )
+    const repoProjects = repository.projects.nodes
+      ? repository.projects.nodes
       : [];
 
-    const orgProjects  = GetValue( resource, 'repository.owner.projects.nodes' )
-      ? GetValue( resource, 'repository.owner.projects.nodes' )
+    const orgProjects  = repository.owner.projects.nodes
+      ? repository.owner.projects.nodes
       : [];
     
     // Get the columns with matching names
@@ -66,6 +61,9 @@ Toolkit.run( async ( tools ) => {
           : [];
       });
 
+
+    tools.log( columns );
+
     // Check we have a valid column ID
     if( !columns.length ) {
       tools.exit.failure( `Could not find "${ projectName }" with "${ columnName }" column` );
@@ -73,6 +71,7 @@ Toolkit.run( async ( tools ) => {
 
     // Add the card to the project
     for( const column in columns ) {
+      tools.log( column );
       await tools.github.projects.createCard({ 
         column_id: column.id,
         content_id: issue.node_id,
