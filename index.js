@@ -45,12 +45,12 @@ Toolkit.run( async ( tools ) => {
     }`);
 
     // Get an array of all matching projects
-    const repoProjects = repository.projects.nodes
-      ? repository.projects.nodes
+    const repoProjects = resource.repository.projects.nodes
+      ? resource.repository.projects.nodes
       : [];
 
-    const orgProjects  = repository.owner.projects.nodes
-      ? repository.owner.projects.nodes
+    const orgProjects  = resource.repository.owner.projects.nodes
+      ? resource.repository.owner.projects.nodes
       : [];
     
     // Get the columns with matching names
