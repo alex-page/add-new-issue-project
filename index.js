@@ -10,7 +10,7 @@ Toolkit.run( async ( tools ) => {
     // Get the data from the event
     const issue = tools.context.payload.issue;
 
-    // Get the project ID from the name
+    // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
         ... on Issue {
@@ -80,14 +80,13 @@ Toolkit.run( async ( tools ) => {
           reject( error );
         }
       })
-    })
+    });
 
     // Wait for completion
-    await Promise.all( createCards )
-      .catch( error => tools.exit.failure( error ) );
+    await Promise.all( createCards ).catch( error => tools.exit.failure( error ) );
 
     // Log success message
-    tools.log.success( `Added "${ issue.title }" to "${ projectName }" in "${ columnName }".` );
+    tools.log.success( `Added ${ issue.title } to ${ projectName } in ${ columnName }.` );
   }
   catch( error ){
     tools.exit.failure( error );
