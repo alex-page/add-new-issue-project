@@ -10,6 +10,9 @@ Toolkit.run( async ( tools ) => {
     // Get the data from the event
     const { issue } = tools.context.payload;
 
+    tools.log( tools.context.payload );
+    tools.log( issue );
+
     // Get the project ID from the name
     const { resource } = await tools.github.graphql(`query {
       resource( url: "${ issue.url }" ) {
