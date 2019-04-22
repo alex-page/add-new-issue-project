@@ -3,18 +3,14 @@ const { Toolkit } = require( 'actions-toolkit' );
 
 Toolkit.run( async ( tools ) => {
   try {
-    const event = tools.context.event;
-    tools.log( 'hello?' );
-    tools.log( tools.context.payload );
-    tools.log( tools.context.workflow );
-    tools.log( tools.context.action );
+    const { action, issue } = tools.context.payload;
+    if( action !== 'opened' ){
+      tools.exit.neutral( `Event ${ action } is not supported by this action.` )
+    }
 
     // Get the arguments
     const projectName = tools.arguments._[ 0 ];
     const columnName  = tools.arguments._[ 1 ];
-
-    // Get the data from the event
-    const issue = tools.context.payload.issue;
 
     // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
