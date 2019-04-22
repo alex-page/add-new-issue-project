@@ -5,6 +5,8 @@ Toolkit.run( async ( tools ) => {
   try {
     const event = tools.context.event;
     tools.log( event );
+    tools.log( 'hello?' );
+    tools.log( tools.context.event );
 
     // Get the arguments
     const projectName = tools.arguments._[ 0 ];
