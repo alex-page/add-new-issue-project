@@ -3,6 +3,9 @@ const { Toolkit } = require( 'actions-toolkit' );
 
 Toolkit.run( async ( tools ) => {
   try {
+    const event = tools.context.event;
+    tools.log( event );
+
     // Get the arguments
     const projectName = tools.arguments._[ 0 ];
     const columnName  = tools.arguments._[ 1 ];
@@ -92,6 +95,6 @@ Toolkit.run( async ( tools ) => {
     tools.exit.failure( error );
   }
 }, {
-  event: [ 'issues.opened' ],
+  event: [ 'issues' ],
   secrets: [ 'GITHUB_TOKEN' ],
 })
