@@ -13,9 +13,11 @@ FROM node:alpine
 # Labels for GitHub to read your action
 LABEL "com.github.actions.name"="Add new issues to project"
 LABEL "com.github.actions.description"="✨ Magically add new issues to projects"
-
 LABEL "com.github.actions.icon"="plus"
 LABEL "com.github.actions.color"="green"
+LABEL "repository"="https://github.com/alex-page/add-new-issue-project"
+LABEL "homepage"="https://github.com/alex-page/add-new-issue-project"
+LABEL "maintainer"="Alex Page <alex@alexpage.com.au>".
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./

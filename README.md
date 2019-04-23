@@ -26,5 +26,6 @@ action "alex-page/add-new-issue-project" {
 
 ## Release history
 
+- v0.0.3 - Add missing labels for action release
 - v0.0.2 - End in a neutral state for unsupported issue action
 - v0.0.1 - First release
