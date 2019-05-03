@@ -12,6 +12,10 @@ Toolkit.run( async ( tools ) => {
     const projectName = tools.arguments._[ 0 ];
     const columnName  = tools.arguments._[ 1 ];
 
+    const graphqlQueryVariables = { 
+      auth: process.env.GH_PAT ? process.env.GH_PAT : process.env.GITHUB_TOKEN 
+    };
+
     // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
@@ -44,7 +48,8 @@ Toolkit.run( async ( tools ) => {
           }
         }
       }
-    }`);
+    }`,
+    graphqlQueryVariables );
 
     // Get an array of all matching projects
     const repoProjects = resource.repository.projects.nodes || [];
@@ -74,7 +79,7 @@ Toolkit.run( async ( tools ) => {
             addProjectCard( input: { contentId: "${ issue.node_id }", projectColumnId: "${ column.id }" }) {
               clientMutationId
             }
-          }`);
+          }`, graphqlQueryVariables );
 
           resolve();
         }
