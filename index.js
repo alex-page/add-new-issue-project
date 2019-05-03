@@ -12,11 +12,11 @@ Toolkit.run( async ( tools ) => {
     const projectName = tools.arguments._[ 0 ];
     const columnName  = tools.arguments._[ 1 ];
 
-    const graphqlQueryVariables = { 
-      auth: process.env.GH_PAT ? process.env.GH_PAT : process.env.GITHUB_TOKEN 
+    const graphqlQueryVariables = {
+      headers: {
+        authorization: `token ${ process.env.GH_PAT ? process.env.GH_PAT : process.env.GITHUB_TOKEN }`
+      }
     };
-
-    console.log( process.env.GH_PAT ? 'there is a PAT' : 'there is no PAT' );
 
     // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
@@ -50,8 +50,7 @@ Toolkit.run( async ( tools ) => {
           }
         }
       }
-    }`,
-    graphqlQueryVariables );
+    }`, graphqlQueryVariables);
 
     // Get an array of all matching projects
     const repoProjects = resource.repository.projects.nodes || [];
