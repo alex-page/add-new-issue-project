@@ -38,6 +38,7 @@ secrets = ["GH_PAT"]
 
 ## Release history
 
+- v0.0.4 - Fix action `index.js` location, add optional personal access token for private repos
 - v0.0.3 - Add missing labels for action release
 - v0.0.2 - End in a neutral state for unsupported issue action
 - v0.0.1 - First release
