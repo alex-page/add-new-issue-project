@@ -16,6 +16,8 @@ Toolkit.run( async ( tools ) => {
       auth: process.env.GH_PAT ? process.env.GH_PAT : process.env.GITHUB_TOKEN 
     };
 
+    console.log( process.env.GH_PAT ? 'there is a PAT' : 'there is no PAT' );
+
     // Fetch the column ids and names
     const { resource } = await tools.github.graphql(`query {
       resource( url: "${ issue.html_url }" ) {
