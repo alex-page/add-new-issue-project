@@ -26,7 +26,7 @@ action "alex-page/add-new-issue-project" {
 
 ## Private repositories
 
-In some cases you may want to do add this functionality for a private repository or one you do not have admin rights to. You will likely get an error like:
+In some cases you may want to do add this functionality for a private repository or one you do not have admin rights to. You may get an error like:
 ```shell
 GraphqlError: Resource not accessible by integration
 ```
@@ -35,6 +35,12 @@ When this happens you will need to provide a [personal access token](https://hel
 ```
 secrets = ["GH_PAT"]
 ```
+
+With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` on the Personal Access Token.
+```
+GraphqlError: Resource protected by organization SAML enforcement. You must grant your personal token access to this organization
+```
+
 
 ## Release history
 
