@@ -36,7 +36,7 @@ When this happens you will need to provide a [personal access token](https://hel
 secrets = ["GH_PAT"]
 ```
 
-With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` on the Personal Access Token.
+With certain organisations there may be SAML enforcement. This means you will need to `Enable SSO` when you create the personal access token.
 ```
 GraphqlError: Resource protected by organization SAML enforcement. You must grant your personal token access to this organization
 ```
