@@ -1,6 +1,7 @@
 {
   "name": "add-new-issue-project",
-  "version": "0.0.2",
+  "private": true,
+  "version": "0.0.5",
   "description": "GitHub action to automagically add new issues to projects.",
   "main": "index.js",
   "scripts": {
